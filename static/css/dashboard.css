@@ -1,0 +1,197 @@
+/* ═══════════════════════════════════════════════════════
+   eTELEmo TeleHealth — Dashboard, Forms & Admin Styles
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Auth pages ───────────────────────────────────────── */
+.auth-page       { min-height: 100vh; padding-top: 64px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--navy) 0%, #0D2B45 100%); position: relative; }
+.auth-page::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 70%, rgba(13,115,119,.2) 0%, transparent 60%); }
+.auth-box        { position: relative; background: var(--white); border-radius: var(--radius-lg); padding: 2.5rem; width: 100%; max-width: 420px; box-shadow: var(--shadow-lg); margin: 1rem; }
+.auth-logo       { text-align: center; margin-bottom: 1.5rem; }
+.auth-logo-mark  { width: 60px; height: 60px; background: var(--teal); border-radius: 14px; display: inline-flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 26px; color: white; font-weight: 700; margin-bottom: .75rem; }
+.auth-title      { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--navy); }
+.auth-sub        { color: var(--muted); font-size: .85rem; margin-top: 4px; }
+
+/* ── Nurse Dashboard ──────────────────────────────────── */
+#page-dashboard  { padding-top: 64px; min-height: 100vh; background: var(--cream); }
+.dash-header     { background: var(--navy); padding: 2rem 1.5rem; border-bottom: 1px solid rgba(255,255,255,.05); }
+.dash-inner      { max-width: 1200px; margin: 0 auto; }
+.dash-greeting   { font-family: 'Playfair Display', serif; font-size: 1.7rem; color: var(--white); }
+.dash-date       { color: var(--muted); font-size: .87rem; margin-top: 4px; }
+.dash-stats      { display: flex; gap: 1rem; margin-top: 1.5rem; }
+.dash-stat       { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1); border-radius: 10px; padding: .9rem 1.3rem; flex: 1; }
+.dash-stat-num   { font-family: 'DM Mono', monospace; font-size: 1.7rem; color: var(--teal-light); font-weight: 500; }
+.dash-stat-label { color: var(--muted); font-size: .75rem; text-transform: uppercase; letter-spacing: .05em; }
+.dash-body       { padding: 1.5rem; max-width: 1200px; margin: 0 auto; }
+.forms-title     { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--navy); margin-bottom: 1.2rem; }
+
+/* ── Form tiles ───────────────────────────────────────── */
+.forms-grid  { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; }
+.form-tile   { background: var(--white); border-radius: var(--radius); padding: 1.4rem; border: 1px solid var(--border); cursor: pointer; transition: all .25s; position: relative; overflow: hidden; display: flex; flex-direction: column; gap: .6rem; }
+.form-tile::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--teal); transform: scaleX(0); transition: transform .3s; transform-origin: left; }
+.form-tile:hover  { box-shadow: var(--shadow-lg); transform: translateY(-3px); border-color: var(--teal); }
+.form-tile:hover::after { transform: scaleX(1); }
+.tile-num   { font-family: 'DM Mono', monospace; font-size: .7rem; color: var(--muted); }
+.tile-icon  { font-size: 1.9rem; }
+.tile-name  { font-family: 'Playfair Display', serif; font-size: .95rem; color: var(--navy); font-weight: 600; }
+.tile-desc  { color: var(--slate); font-size: .78rem; line-height: 1.5; }
+.tile-arrow { color: var(--teal); font-size: 1.1rem; margin-top: auto; }
+
+/* Recent submissions panel */
+.recent-panel        { margin-top: 1.5rem; background: var(--white); border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; }
+.recent-panel-header { padding: 1rem 1.4rem; background: var(--teal-pale); border-bottom: 1px solid var(--border); font-weight: 600; color: var(--teal); font-size: .87rem; }
+.recent-panel-body   { padding: 1.2rem; }
+
+/* ── Form fill page ───────────────────────────────────── */
+#page-form          { padding-top: 64px; min-height: 100vh; background: var(--cream); }
+.form-page-header   { background: var(--navy); padding: 1.8rem 1.5rem 1.3rem; }
+.form-header-inner  { max-width: 960px; margin: 0 auto; }
+.form-breadcrumb    { display: flex; align-items: center; gap: 8px; margin-bottom: .6rem; }
+.breadcrumb-link    { color: var(--muted); font-size: .8rem; cursor: pointer; background: none; border: none; font-family: 'DM Sans', sans-serif; transition: color .2s; }
+.breadcrumb-link:hover { color: var(--white); }
+.breadcrumb-sep     { color: var(--muted); font-size: .8rem; }
+.form-page-title    { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--white); }
+.form-page-subtitle { color: var(--muted); font-size: .83rem; }
+.form-page-body     { padding: 1.5rem; max-width: 960px; margin: 0 auto; }
+.form-card          { background: var(--white); border-radius: var(--radius); border: 1px solid var(--border); margin-bottom: 1.3rem; overflow: hidden; }
+.form-card-header   { padding: .9rem 1.4rem; background: var(--teal-pale); border-bottom: 1px solid var(--border); font-weight: 600; color: var(--teal); font-size: .87rem; display: flex; align-items: center; gap: 8px; }
+.form-card-body     { padding: 1.4rem; }
+.submit-row         { display: flex; gap: 1rem; justify-content: flex-end; margin-top: 1.5rem; }
+
+/* ── Admin dashboard ──────────────────────────────────── */
+#page-admin          { padding-top: 64px; min-height: 100vh; background: var(--cream); }
+.admin-header        { background: #1A0A28; padding: 1.8rem 1.5rem; border-bottom: 1px solid rgba(200,150,46,.2); }
+.admin-header-inner  { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+.admin-title         { font-family: 'Playfair Display', serif; font-size: 1.7rem; color: var(--white); }
+.admin-subtitle      { color: var(--muted); font-size: .83rem; }
+.admin-body          { padding: 1.5rem; max-width: 1200px; margin: 0 auto; }
+.admin-tabs          { display: flex; gap: 4px; margin-bottom: 1.8rem; background: var(--white); border-radius: 10px; padding: 5px; border: 1px solid var(--border); width: fit-content; flex-wrap: wrap; }
+.atab                { padding: 8px 18px; border-radius: 7px; cursor: pointer; font-size: .87rem; font-weight: 500; color: var(--slate); border: none; background: none; font-family: 'DM Sans', sans-serif; transition: all .2s; }
+.atab.active         { background: var(--navy); color: white; }
+.atab:hover:not(.active) { background: var(--teal-pale); }
+.admin-panel         { display: none; }
+.admin-panel.active  { display: block; }
+.export-cards        { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.3rem; }
+.panel-title         { font-family: 'Playfair Display', serif; font-size: 1.15rem; margin-bottom: 1rem; }
+
+/* ── Responsive ───────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .hero-content   { grid-template-columns: 1fr; }
+  .hero-visual    { display: none; }
+  .video-grid     { grid-template-columns: 1fr; gap: 2.5rem; }
+  .about-grid     { grid-template-columns: 1fr; gap: 2rem; }
+  .cards-grid     { grid-template-columns: repeat(2, 1fr); }
+  .contact-cards-row { grid-template-columns: repeat(2, 1fr); }
+  .forms-grid     { grid-template-columns: repeat(2, 1fr); }
+  .grid-3, .grid-4 { grid-template-columns: 1fr 1fr; }
+  .export-cards   { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 640px) {
+  section         { padding: 3.5rem 1rem; }
+  #main-nav       { padding: 0 1rem; }
+  .nav-link       { display: none; }
+  .nav-btn        { padding: 7px 11px; font-size: .8rem; }
+  .user-name      { display: none; }
+  .hero           { padding: 4.5rem 1rem 3rem; }
+  .hero h1        { font-size: 2rem; }
+  .hero-actions   { flex-direction: column; }
+  .hero-actions button { width: 100%; }
+  .hero-stats     { gap: 1.2rem; }
+  .cards-grid     { grid-template-columns: 1fr; }
+  .contact-cards-row { grid-template-columns: 1fr; }
+  .about-img      { padding: 1.5rem; }
+  .about-logo-big { font-size: 3.5rem; }
+  .auth-box       { padding: 1.5rem 1.2rem; }
+  .form-row, .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .dash-header    { padding: 1.3rem 1rem; }
+  .dash-greeting  { font-size: 1.3rem; }
+  .dash-stats     { flex-direction: column; gap: .7rem; }
+  .dash-body      { padding: 1rem; }
+  .forms-grid     { grid-template-columns: 1fr; gap: .75rem; }
+  .form-tile      { flex-direction: row; align-items: center; padding: 1.1rem; gap: .9rem; }
+  .tile-icon      { font-size: 1.6rem; flex-shrink: 0; }
+  .tile-desc      { display: none; }
+  .tile-arrow     { margin-top: 0; margin-left: auto; }
+  .form-page-body { padding: 1rem; }
+  .form-card-body { padding: 1rem; }
+  .submit-row     { flex-direction: column; }
+  .submit-row button { width: 100%; }
+  .admin-body     { padding: 1rem; }
+  .admin-tabs     { width: 100%; }
+  .atab           { font-size: .8rem; padding: 7px 11px; }
+  .export-cards   { grid-template-columns: 1fr; }
+  .data-table th, .data-table td { padding: 8px; }
+  footer          { font-size: .78rem; padding: 1.5rem 1rem; }
+}
+
+/* ── My Patients button ──────────────────────────────── */
+.dash-actions {
+  max-width: 1200px; margin: 0 auto 1rem; padding: 0 1.5rem;
+}
+.btn-my-patients {
+  background: var(--teal); color: #fff; border: none;
+  padding: 10px 22px; border-radius: 10px; font-size: .88rem;
+  font-family: 'DM Sans', sans-serif; font-weight: 600;
+  cursor: pointer; transition: all .2s;
+  display: inline-flex; align-items: center; gap: 8px;
+  box-shadow: 0 2px 8px rgba(13,115,119,.3);
+}
+.btn-my-patients:hover { background: var(--teal-light); transform: translateY(-1px); }
+
+/* ── Patient cards ───────────────────────────────────── */
+.loading-msg, .empty-msg {
+  text-align: center; color: var(--muted); font-size: .95rem;
+  padding: 3rem; background: var(--cream); border-radius: 12px;
+  border: 1px dashed var(--border);
+}
+
+.patient-card {
+  background: #fff; border: 1px solid var(--border); border-radius: 14px;
+  padding: 1.2rem 1.5rem; margin-bottom: 1rem;
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  box-shadow: 0 2px 8px rgba(10,22,40,.06); transition: all .2s;
+}
+.patient-card:hover { box-shadow: 0 4px 18px rgba(13,115,119,.15); border-color: var(--teal-light); }
+
+.patient-card-name {
+  font-family: 'Playfair Display', serif; font-size: 1.1rem;
+  color: var(--navy); font-weight: 700; margin-bottom: .3rem;
+}
+.patient-card-meta { font-size: .78rem; color: var(--muted); margin-bottom: .5rem; }
+.patient-card-forms { display: flex; flex-wrap: wrap; gap: .35rem; }
+
+.form-tag {
+  background: var(--teal-pale); color: var(--teal);
+  padding: 3px 10px; border-radius: 100px; font-size: .72rem;
+  font-weight: 500; border: 1px solid rgba(13,115,119,.2);
+}
+
+.btn-view-patient {
+  background: var(--navy); color: #fff; border: none;
+  padding: 10px 18px; border-radius: 10px; font-size: .84rem;
+  font-family: 'DM Sans', sans-serif; font-weight: 600;
+  cursor: pointer; transition: all .2s; white-space: nowrap;
+  display: flex; align-items: center; gap: 6px;
+  box-shadow: 0 2px 6px rgba(10,22,40,.2);
+}
+.btn-view-patient:hover { background: var(--teal); transform: translateY(-1px); }
+
+/* ── Appointment badges ───────────────────────────────── */
+.appt-badge          { display:inline-block;padding:3px 10px;border-radius:100px;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em; }
+.appt-pending        { background:#FEF3C7;color:#92400E; }
+.appt-confirmed      { background:#D1FAE5;color:#065F46; }
+.appt-completed      { background:#DBEAFE;color:#1E40AF; }
+.appt-cancelled      { background:#FEE2E2;color:#991B1B; }
+
+/* Urgent row highlight */
+.appt-urgent-row     { background:rgba(231,76,60,.06) !important;border-left:3px solid #e74c3c; }
+
+/* Appointment filter buttons */
+.appt-filter-btn     { padding:5px 12px;border-radius:7px;border:1px solid var(--border);background:#fff;color:var(--slate);font-size:.8rem;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s; }
+.appt-filter-btn:hover,.appt-filter-btn.active { background:var(--teal);color:#fff;border-color:var(--teal); }
+
+/* Appointment status select */
+.appt-status-sel     { padding:4px 8px;border:1px solid var(--border);border-radius:6px;font-size:.8rem;font-family:'DM Sans',sans-serif;cursor:pointer;background:#fff; }
+
+/* Patient portal form-label inside portal */
+#page-patient-portal .form-label { font-size:.72rem;color:var(--muted);font-weight:500;margin-bottom:2px; }

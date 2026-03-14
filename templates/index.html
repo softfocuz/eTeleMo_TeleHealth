@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>eTELEmo TeleHealth</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link rel="stylesheet" href="/static/css/home.css">
+  <link rel="stylesheet" href="/static/css/dashboard.css">
+</head>
+<body>
+
+<nav id="main-nav">
+  <div class="nav-brand" onclick="showPage('home')">
+    <div class="nav-logo-img">
+      <img src="/static/pictures/logo.png" alt="eTele Mo" style="height:44px;width:44px;border-radius:50%;object-fit:cover;">
+    </div>
+  </div>
+
+  <!-- Mobile hamburger -->
+  <button class="nav-hamburger" id="nav-hamburger" onclick="toggleMobileNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <div class="nav-links" id="guest-nav">
+    <button class="nav-link" onclick="scrollToAnchor('#about')">About</button>
+    <button class="nav-link" onclick="scrollToAnchor('#contact')">Contact</button>
+    <button class="nav-btn outline" onclick="showPage('patient-login')">Patient/Client Login</button>
+    <button class="nav-btn" onclick="showPage('patient-register')">Book Appointment</button>
+    <button class="nav-btn outline" style="background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.3)" onclick="showPage('login')">Nurse/Admin</button>
+  </div>
+
+  <div id="user-nav">
+    <div class="user-chip">
+      <div class="user-avatar" id="nav-avatar">N</div>
+      <span class="user-name" id="nav-username">Nurse</span>
+    </div>
+    <button class="nav-btn outline" onclick="doLogout()">Sign Out</button>
+  </div>
+
+  <div id="patient-nav" style="display:none;align-items:center;gap:.75rem">
+    <div class="user-chip">
+      <div class="user-avatar" style="background:var(--teal-light)">P</div>
+      <span class="user-name" id="nav-patient-name">Patient</span>
+    </div>
+    <button class="nav-btn outline" onclick="showPage('patient-portal')">My Appointments</button>
+    <button class="nav-btn outline" onclick="patientLogout()">Sign Out</button>
+  </div>
+</nav>
+
+<!-- Mobile navigation drawer -->
+<div class="nav-drawer" id="nav-drawer">
+  <button class="nav-link" onclick="scrollToAnchor('#about');toggleMobileNav()">About</button>
+  <button class="nav-link" onclick="scrollToAnchor('#contact');toggleMobileNav()">Contact</button>
+  <button class="nav-btn outline" onclick="showPage('patient-login');toggleMobileNav()">Patient Login</button>
+  <button class="nav-btn" onclick="showPage('patient-register');toggleMobileNav()">Book Appointment</button>
+  <button class="nav-btn outline" style="background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.3)" onclick="showPage('login');toggleMobileNav()">Nurse / Admin</button>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     PAGE: HOME
+     ═══════════════════════════════════════════════════════ -->
+<div id="page-home" class="page active" style="padding-top:64px">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-content">
+      <div>
+        <h1 class="hero-h1">eTele Mo</h1>
+        <div class="hero-tagline">
+          <span>Connected Care Online</span>
+          <span class="hero-tagline-line"></span>
+        </div>
+        <p class="hero-desc">
+          eTele Mo is a telehealth platform created to give patients
+          a more convenient, accessible, and reliable option for non-urgent medical concerns.
+        </p>
+        <div class="hero-actions">
+          <button class="btn-primary" onclick="showPage('register')">Get Started</button>
+          <button class="btn-secondary" onclick="scrollToAnchor('#features')">Learn More</button>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <img src="/static/pictures/logo.png" alt="eTele Mo" class="hero-logo-img">
+      </div>
+    </div>
+  </section>
+
+  <!-- Video -->
+  <section class="video-section">
+    <div class="section-inner video-grid">
+      <div class="video-wrap">
+        <video width="100%" controls>
+          <source src="{{ url_for('static', filename='videos/eTeleMoFINAL.mp4') }}" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <div class="video-text">
+        <h2 class="section-title video-big-title">
+          Connected<br>Care Online
+          <span class="title-line"></span><br>
+          You tell, We Heal
+        </h2>
+        <p class="section-desc">
+          Watch our short advertisement to see how eTele Mo connects you with our telehealth support team
+          through a secure and convenient platform designed to make healthcare more accessible for
+          non-urgent medical concerns anytime and anywhere.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Info Cards -->
+  <section class="info-section">
+    <div class="section-inner">
+      <div class="section-tag" id="features">Features</div>
+      <h2 class="section-title">Expert Care at Your Fingertips</h2>
+      <p class="section-desc">At eTele Mo, we are committed to provide accessible, reliable, and patient-centered telehealth services tailored to meet the support and care every patient needs. Our services include:</p>
+      <div class="cards-grid">
+        <div class="info-card">
+          <div class="card-icon"><img src="/static/pictures/1.png" alt="" class="card-img-icon"></div>
+          <h3 class="card-title">Symptom Assessment and Initial Health Evaluation</h3>
+          <p class="card-text">Our eTele Mo team conducts a preliminary assessment based on patient's reported symptoms and concern to provide guidance on possible conditions and recommend appropriate course of action for quality care.</p>
+        </div>
+        <div class="info-card">
+          <div class="card-icon"><img src="/static/pictures/2.png" alt="" class="card-img-icon"></div>
+          <h3 class="card-title">Online Medical Consultations</h3>
+          <p class="card-text">eTele Mo facilitates virtual consultations with our licensed healthcare providers regarding patient common and non-emergency health concerns. We provide a safe and secure online environment where patients can discuss their health conditions freely.</p>
+        </div>
+        <div class="info-card">
+          <div class="card-icon"><img src="/static/pictures/3.png" alt="" class="card-img-icon"></div>
+          <h3 class="card-title">Medical Advice and Treatment Guidance</h3>
+          <p class="card-text">Based on the consultation and symptom assessment, we offer appropriate medical advice and recommendations for home management and treatment of minor health conditions.</p>
+        </div>
+        <div class="info-card">
+          <div class="card-icon"><img src="/static/pictures/4.png" alt="" class="card-img-icon"></div>
+          <h3 class="card-title">Prescription and Medical Guidance</h3>
+          <p class="card-text">When clinically appropriate, we can issue medical prescriptions or provide guidance to help you understand the importance and proper use of your prescribed medications issued by your healthcare provider.</p>
+        </div>
+        <div class="info-card">
+          <div class="card-icon"><img src="/static/pictures/5.png" alt="" class="card-img-icon"></div>
+          <h3 class="card-title">Health Education and Preventive Counseling</h3>
+          <p class="card-text">Our eTele Mo team provides reliable and evidence-based health advice to help you understand your health conditions better. We also give educational information to guide you in your journey to wellness and encourage healthy practices.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="about-section" id="about">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div>
+          <div class="section-tag" style="color:var(--teal-light)">About Us</div>
+          <h2 class="section-title">Serving Healthcare Professionals</h2>
+          <p class="section-desc">
+            In today's fast-paced world, clicking, scrolling, and tapping has become second nature.
+            From online shopping to virtual meetings, convenience is everywhere. Yet when it comes to
+            healthcare, many still face long waiting times, unnecessary clinic visits, and complicated scheduling.
+            Isn't it time healthcare caught up with the digital world?
+          </p>
+          <p class="section-desc" style="margin-top:1rem">
+            Introducing eTele Mo — <em>tell mo, sakit mo</em> — a telehealth platform that brings healthcare
+            directly to you. With just a few clicks, you can consult licensed healthcare professionals,
+            receive guidance, and manage non-urgent health concerns without leaving your home.
+            Think of it as your personal health assistant, available anytime, anywhere!
+          </p>
+        </div>
+        <div class="about-img">
+          <div class="about-logo-big"><img style="height: 120px; width: 120px; border-radius:60px;" src="static/pictures/logo.png"></div>
+          <p style="color:var(--teal-light);font-family:'Playfair Display',serif;font-size:1.1rem;margin-top:.5rem">eTele Mo TeleHealth</p>
+          <p class="about-tagline">Poblacion, Banga, Aklan</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact-section" id="contact">
+    <div class="section-inner">
+      <div class="section-tag">Contact</div>
+      <h2 class="section-title">Get In Touch</h2>
+      <p class="section-desc">Reach out to the eTele Mo TeleHealth team for support with your facility's digital needs.</p>
+      <div class="contact-cards-row">
+        <div class="contact-card"><div class="contact-icon">📍</div><div><div class="contact-label">Address</div><div class="contact-val">Poblacion, Banga, Aklan, Philippines</div></div></div>
+        <div class="contact-card"><div class="contact-icon">📧</div><div><div class="contact-label">Email</div><div class="contact-val"><a style="color:white;" href="mailto:etelemo365@gmail.com">Click eTele Mo Email Account</a></div></div></div>
+        <div class="contact-card"><div class="contact-icon"><img style="height:30px; width:30px; border-radius:15px;" src="static/pictures/fb.png"></div><div><div class="contact-label">Facebook</div><div class="contact-val"><a href="https://www.facebook.com/share/1CEKFT9eAt/" style="color:white;">Click eTele Mo Facebook Account</a></div></div></div>
+        <div class="contact-card"><div class="contact-icon">📞</div><div><div class="contact-label">Phone</div><div class="contact-val">0945 248 2898</div></div></div>
+        <div class="contact-card"><div class="contact-icon">🕐</div><div><div class="contact-label">Office Hours</div><div class="contact-val">Mon–Fri: 8:00 AM – 9:00 PM<br>Saturday: 8:00 AM – 5:00 PM<br>Sunday: 8:00 AM – 12:00 NN</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Applications -->
+  <section class="app-section">
+    <div class="section-inner">
+      <div class="section-tag">Platforms</div>
+      <h2 class="section-title" style="color:var(--navy)">Applications</h2>
+      <div class="app-grid">
+        <div class="app-card">
+          <img src="/static/pictures/gm.png" alt="Google Meet" class="app-icon">
+          <div class="app-name">Google Meet</div>
+          <div class="app-desc">Video conferencing for remote consultations, patient assessments, and follow-up appointments through secure video communication.</div>
+        </div>
+        <div class="app-card">
+          <img src="/static/pictures/fb.png" alt="Facebook" class="app-icon">
+          <div class="app-name">Facebook</div>
+          <div class="app-desc">Share health information, provide updates, conduct live discussions, and engage with patients through groups and pages.</div>
+        </div>
+        <div class="app-card">
+          <img src="/static/pictures/mess.png" alt="Messenger" class="app-icon">
+          <div class="app-name">Messenger</div>
+          <div class="app-desc">Instant messaging for quick communication between healthcare providers and patients via messages, voice, and video calls.</div>
+        </div>
+        <div class="app-card">
+          <img src="/static/pictures/zoom.png" alt="Zoom" class="app-icon">
+          <div class="app-name">Zoom</div>
+          <div class="app-desc">Virtual meetings and webinars for remote consultations, assessments, and health education sessions through real-time video.</div>
+        </div>
+        <div class="app-card">
+          <img src="/static/pictures/ins.png" alt="Instagram" class="app-icon">
+          <div class="app-name">Instagram</div>
+          <div class="app-desc">Share wellness tips, health education, and visual health information to promote awareness about medical conditions.</div>
+        </div>
+        <div class="app-card">
+          <img src="/static/pictures/tg.png" alt="Telegram" class="app-icon">
+          <div class="app-name">Telegram</div>
+          <div class="app-desc">Cloud-based messaging for communication, file sharing, health reminders, and educational materials between providers and patients.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>
+      © 2026 eTele Mo TeleHealth. All rights reserved.
+    </p>
+  </footer>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     PAGE: NURSE LOGIN
+     ═══════════════════════════════════════════════════════ -->
+<div id="page-login" class="page">
+  <div class="auth-page">
+    <div class="auth-box">
+      <div class="auth-logo">
+        <div class="auth-logo-mark">e</div>
+        <div class="auth-title">Welcome Back</div>
+        <div class="auth-sub">Sign in to your eTELEmo nurse account</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email or Username</label>
+        <input class="form-input" type="text" id="login-id" placeholder="email or username">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input class="form-input" type="password" id="login-password" placeholder="••••••••"
+               onkeydown="if(event.key==='Enter') doLogin()">
+      </div>
+      <button class="btn-primary" style="width:100%;margin-top:.4rem" onclick="doLogin()">Sign In</button>
+      <p style="text-align:center;margin-top:1rem;color:var(--muted);font-size:.85rem">
+        No account? <a href="#" onclick="showPage('register')" style="color:var(--teal)">Register here</a>
+      </p>
+      <div class="divider"></div>
+      <p style="text-align:center">
+        <a href="#" onclick="showPage('admin-login')" style="color:var(--muted);font-size:.78rem">Admin Login →</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     PAGE: NURSE REGISTER
+     ═══════════════════════════════════════════════════════ -->
+<div id="page-register" class="page">
+  <div class="auth-page">
+    <div class="auth-box">
+      <div class="auth-logo">
+        <div class="auth-logo-mark">e</div>
+        <div class="auth-title">Nurse Registration</div>
+        <div class="auth-sub">Submit for admin approval before logging in</div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">First Name *</label><input class="form-input" id="reg-fname" placeholder="Maria"></div>
+        <div class="form-group"><label class="form-label">Last Name *</label><input class="form-input" id="reg-lname" placeholder="Santos"></div>
+      </div>
+      <div class="form-group"><label class="form-label">Email *</label><input class="form-input" type="email" id="reg-email" placeholder="nurse@hospital.ph"></div>
+      <div class="form-group"><label class="form-label">Username *</label><input class="form-input" id="reg-username" placeholder="maria.santos"></div>
+      <div class="form-group"><label class="form-label">Password *</label><input class="form-input" type="password" id="reg-password" placeholder="••••••••"></div>
+      <button class="btn-primary" style="width:100%;margin-top:.4rem" onclick="doRegister()">Submit Registration</button>
+      <p style="text-align:center;margin-top:1rem;color:var(--muted);font-size:.85rem">
+        Already registered? <a href="#" onclick="showPage('login')" style="color:var(--teal)">Sign in</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     PAGE: ADMIN LOGIN
+     ═══════════════════════════════════════════════════════ -->
+<div id="page-admin-login" class="page">
+  <div class="auth-page">
+    <div class="auth-box">
+      <div class="auth-logo">
+        <div class="auth-logo-mark" style="background:#6D28D9">👑</div>
+        <div class="auth-title">Admin Portal</div>
+        <div class="auth-sub">eTELEmo Administration Access</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Admin Email</label>
+        <input class="form-input" type="email" id="admin-email" value="admin@etelemo.health">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input class="form-input" type="password" id="admin-password" placeholder="admin123"
+               onkeydown="if(event.key==='Enter') doAdminLogin()">
+      </div>
+      <button class="btn-primary" style="width:100%;margin-top:.4rem;background:#6D28D9" onclick="doAdminLogin()">
+        Admin Sign In
+      </button>
+      <p style="text-align:center;margin-top:1rem">
+        <a href="#" onclick="showPage('login')" style="color:var(--muted);font-size:.83rem">← Back to Nurse Login</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     PAGE: NURSE DASHBOARD
+     ═══════════════════════════════════════════════════════ -->
+<div id="page-dashboard" class="page">
+  <div class="dash-header">
+    <div class="dash-inner">
+      <div class="dash-greeting">Good day, <span id="dash-name">Nurse</span> 👋</div>
+      <div class="dash-date" id="dash-date"></div>
+      <div class="dash-stats">
+        <div class="dash-stat">
+          <div class="dash-stat-num" id="stat-today">0</div>
+          <div class="dash-stat-label">Submissions Today</div>
+        </div>
+        <div class="dash-stat">
+          <div class="dash-stat-num">10</div>
+          <div class="dash-stat-label">Available Forms</div>
+        </div>
+        <div class="dash-stat">
+          <div class="dash-stat-num" id="stat-total">0</div>
+          <div class="dash-stat-label">Total Records</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dash-body">
+    <div class="dash-actions"><button class="btn-my-patients" onclick="showPage('patients');loadPatientRecords()">👤 My Patients &amp; Records</button></div>
+    <div class="forms-title">📋 Patient Forms</div>
+    <div class="forms-grid" id="forms-grid"></div>
+
+    <div class="recent-panel" id="recent-submissions" style="display:none">
+      <div class="recent-panel-header">📁 My Recent Submissions</div>
+      <div class="recent-panel-body">
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr><th>Form</th><th>Patient</th><th>Submitted</th></tr>
+            </thead>
+            <tbody id="recent-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     PAGE: MY PATIENTS / PRINT RECORDS
+     ═══════════════════════════════════════════════════════ -->
+<div id="page-patients" class="page">
+  <div class="form-page-header">
+    <div class="form-header-inner">
+      <div class="form-breadcrumb">
+        <button class="breadcrumb-link" onclick="showPage('dashboard')">Dashboard</button>
+        <span class="breadcrumb-sep">›</span>
+        <span style="color:var(--teal-light);font-size:.8rem">My Patients</span>
+      </div>
+      <div class="form-page-title">👤 My Patients &amp; Records</div>
+      <div class="form-page-subtitle">Select a patient to print or download their forms as PDF</div>
+    </div>
+  </div>
+  <div class="form-page-body">
+    <div id="patient-list" style="max-width:900px;margin:0 auto;padding:1.5rem 1rem"></div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     PAGE: FORM FILL
+     ═══════════════════════════════════════════════════════ -->
+<div id="page-form" class="page">
+  <div class="form-page-header">
+    <div class="form-header-inner">
+      <div class="form-breadcrumb">
+        <button class="breadcrumb-link" onclick="showPage('dashboard')">Dashboard</button>
+        <span class="breadcrumb-sep">›</span>
+        <span style="color:var(--teal-light);font-size:.8rem" id="form-bc">Form</span>
+      </div>
+      <div class="form-page-title" id="form-title">Form</div>
+      <div class="form-page-subtitle" id="form-subtitle"></div>
+    </div>
+  </div>
+  <div class="form-page-body" id="form-content"></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     PAGE: ADMIN DASHBOARD
+     ═══════════════════════════════════════════════════════ -->
+<div id="page-admin" class="page">
+  <div class="admin-header">
+    <div class="admin-header-inner">
+      <div>
+        <div class="admin-title">👑 Admin Dashboard</div>
+        <div class="admin-subtitle">eTELEmo TeleHealth — Administration Panel</div>
+      </div>
+      <button class="nav-btn outline" onclick="doLogout()">Sign Out</button>
+    </div>
+  </div>
+
+  <div class="admin-body">
+    <div class="admin-tabs">
+      <button class="atab active" data-tab="registrations" onclick="adminTab('registrations')">Nurse Registrations</button>
+      <button class="atab" data-tab="appointments" onclick="adminTab('appointments')">📅 Appointments</button>
+      <button class="atab" data-tab="submissions" onclick="adminTab('submissions')">Form Submissions</button>
+      <button class="atab" data-tab="export" onclick="adminTab('export')">Export / Download</button>
+    </div>
+
+    <div class="admin-panel active" id="panel-registrations">
+      <h3 class="panel-title">Nurse Registration Requests</h3>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr><th>Name</th><th>Email</th><th>Username</th><th>Registered</th><th>Status</th><th>Actions</th></tr>
+          </thead>
+          <tbody id="reg-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="admin-panel" id="panel-submissions">
+      <h3 class="panel-title">Submitted Patient Forms</h3>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr><th>Form Type</th><th>Patient Name</th><th>Submitted By</th><th>Date &amp; Time</th><th>Actions</th></tr>
+          </thead>
+          <tbody id="sub-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="admin-panel" id="panel-appointments">
+      <h3 class="panel-title">📅 Patient Appointment Requests</h3>
+      <div style="display:flex;gap:.6rem;align-items:center;margin-bottom:1rem;flex-wrap:wrap">
+        <input class="form-input" id="appt-search" placeholder="🔍 Search patient, concern..." oninput="searchAppts()" style="max-width:280px;padding:7px 12px;font-size:.84rem">
+        <div style="display:flex;gap:.4rem">
+          <button class="appt-filter-btn active" data-filter="all"     onclick="filterAppts('all')">All</button>
+          <button class="appt-filter-btn" data-filter="Pending"        onclick="filterAppts('Pending')">⏳ Pending</button>
+          <button class="appt-filter-btn" data-filter="Confirmed"      onclick="filterAppts('Confirmed')">✅ Confirmed</button>
+          <button class="appt-filter-btn" data-filter="Completed"      onclick="filterAppts('Completed')">✔ Completed</button>
+          <button class="appt-filter-btn" data-filter="Cancelled"      onclick="filterAppts('Cancelled')">✕ Cancelled</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Patient</th><th>Email</th><th>Phone</th><th>Messenger</th>
+              <th>Appointment</th><th>Concern</th><th>Status</th><th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="appt-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="admin-panel" id="panel-export">
+      <h3 class="panel-title">Export &amp; Download Records</h3>
+      <div class="export-cards">
+        <div class="info-card" style="cursor:default">
+          <div class="card-icon">📊</div>
+          <h3 class="card-title">Download Excel Workbook</h3>
+          <p class="card-text">Download the eTELEmo Excel file with all form submissions appended to their respective sheets.</p>
+          <button class="btn-export" style="margin-top:1rem" onclick="downloadExcel()">⬇ Download Excel</button>
+        </div>
+        <div class="info-card" style="cursor:default">
+          <div class="card-icon">👩‍⚕️</div>
+          <h3 class="card-title">Nurse Registry</h3>
+          <p class="card-text">View all registered nurses, their approval status, and account details.</p>
+          <button class="btn-export" style="margin-top:1rem" onclick="adminTab('registrations')">📋 View Nurses</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     PAGE: PATIENT REGISTER
+     ═══════════════════════════════════════════════════════ -->
+<div id="page-patient-register" class="page">
+  <div class="auth-page">
+    <div class="auth-box" style="max-width:600px">
+      <div class="auth-logo">
+        <div class="auth-logo-mark" style="background:var(--teal-light)">👤</div>
+        <div class="auth-title">Patient Registration</div>
+        <div class="auth-sub">Book an appointment with eTELEmo TeleHealth</div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">First Name *</label><input class="form-input" id="preg-fname" placeholder="Maria"></div>
+        <div class="form-group"><label class="form-label">Last Name *</label><input class="form-input" id="preg-lname" placeholder="Santos"></div>
+      </div>
+      <div class="form-group"><label class="form-label">Middle Name *</label><input class="form-input" id="preg-mname" placeholder="Cruz"></div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Age *</label><input class="form-input" type="number" id="preg-age" placeholder="25" min="1" max="120"></div>
+        <div class="form-group"><label class="form-label">Sex *</label>
+          <select class="form-select" id="preg-sex">
+            <option value="">Select...</option>
+            <option>Male</option><option>Female</option></select></div>
+        <div class="form-group"><label class="form-label">Birthday *</label><input class="form-input" type="date" id="preg-birthday"></div>
+      </div>
+      <div class="form-group"><label class="form-label">Address *</label><input class="form-input" id="preg-address" placeholder="Poblacion, Banga, Aklan"></div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Phone Number *</label><input class="form-input" id="preg-phone" placeholder="09XXXXXXXXX"></div>
+        <div class="form-group"><label class="form-label">Messenger *</label><input class="form-input" id="preg-messenger" placeholder="Facebook/Messenger name"></div>
+      </div>
+      <div class="form-group"><label class="form-label">Email *</label><input class="form-input" type="email" id="preg-email" placeholder="you@email.com"></div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Password *</label><input class="form-input" type="password" id="preg-password" placeholder="••••••••"></div>
+        <div class="form-group"><label class="form-label">Confirm Password *</label><input class="form-input" type="password" id="preg-confirm" placeholder="••••••••"></div>
+      </div>
+      <div style="background:var(--teal-pale);border-radius:10px;padding:1rem;margin:.5rem 0 1rem">
+        <div style="font-size:.82rem;font-weight:600;color:var(--teal);margin-bottom:.6rem">📅 Appointment Request</div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Preferred Date *</label><input class="form-input" type="date" id="preg-appt-date"></div>
+          <div class="form-group"><label class="form-label">Preferred Time *</label><input class="form-input" type="time" id="preg-appt-time"></div>
+        </div>
+        <div class="form-group"><label class="form-label">Concern / Message *</label>
+          <textarea class="form-textarea" id="preg-concern" placeholder="Describe your health concern or reason for appointment..." style="min-height:80px"></textarea></div>
+      </div>
+      <button class="btn-primary" style="width:100%" onclick="patientRegister()">Register &amp; Book Appointment</button>
+      <p style="text-align:center;margin-top:1rem;color:var(--muted);font-size:.85rem">
+        Already registered? <a href="#" onclick="showPage('patient-login')" style="color:var(--teal)">Sign in here</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     PAGE: PATIENT LOGIN
+     ═══════════════════════════════════════════════════════ -->
+<div id="page-patient-login" class="page">
+  <div class="auth-page">
+    <div class="auth-box">
+      <div class="auth-logo">
+        <div class="auth-logo-mark" style="background:var(--teal-light)">👤</div>
+        <div class="auth-title">Patient Login</div>
+        <div class="auth-sub">Access your appointments and health records</div>
+      </div>
+      <div class="form-group"><label class="form-label">Email</label>
+        <input class="form-input" type="email" id="plogin-email" placeholder="you@email.com"></div>
+      <div class="form-group"><label class="form-label">Password</label>
+        <input class="form-input" type="password" id="plogin-password" placeholder="••••••••"
+               onkeydown="if(event.key==='Enter') patientLogin()"></div>
+      <button class="btn-primary" style="width:100%;margin-top:.4rem" onclick="patientLogin()">Sign In</button>
+      <p style="text-align:center;margin-top:1rem;color:var(--muted);font-size:.85rem">
+        New patient? <a href="#" onclick="showPage('patient-register')" style="color:var(--teal)">Register here</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     PAGE: PATIENT PORTAL
+     ═══════════════════════════════════════════════════════ -->
+<div id="page-patient-portal" class="page">
+  <div class="dash-header">
+    <div class="dash-inner">
+      <div class="dash-greeting">Hello, <span id="portal-name">Patient</span> 👋</div>
+      <div class="dash-date" id="portal-date"></div>
+    </div>
+  </div>
+  <div class="dash-body">
+
+    <!-- Profile Summary -->
+    <div class="form-card" style="margin-bottom:1.5rem">
+      <div class="form-card-header">👤 My Profile</div>
+      <div class="form-card-body">
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:.8rem">
+          <div><div class="form-label">Full Name</div><div><span id="prof-fname"></span> <span id="prof-mname"></span> <span id="prof-lname"></span></div></div>
+          <div><div class="form-label">Age</div><div id="prof-age"></div></div>
+          <div><div class="form-label">Sex</div><div id="prof-sex"></div></div>
+          <div><div class="form-label">Birthday</div><div id="prof-birthday"></div></div>
+          <div><div class="form-label">Phone</div><div id="prof-phone"></div></div>
+          <div><div class="form-label">Email</div><div id="prof-email"></div></div>
+          <div><div class="form-label">Messenger</div><div id="prof-messenger"></div></div>
+          <div><div class="form-label">Address</div><div id="prof-address"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- My Appointments -->
+    <div class="form-card">
+      <div class="form-card-header" style="display:flex;align-items:center;justify-content:space-between">
+        📅 My Appointments
+        <button class="btn-primary" style="font-size:.82rem;padding:7px 16px" onclick="openBookAppt()">+ New Appointment</button>
+      </div>
+      <div class="form-card-body">
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr><th>Date</th><th>Time</th><th>Concern</th><th>Submitted</th><th>Status</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="patient-appt-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay hidden" id="modal" onclick="if(event.target===this) closeModal()">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast-container" id="toasts"></div>
+
+<!-- SCRIPTS -->
+<script src="/static/js/api.js"></script>
+<script src="/static/js/router.js"></script>
+<script src="/static/js/auth.js"></script>
+<script src="/static/js/nurse.js"></script>
+<script src="/static/js/forms.js"></script>
+<script src="/static/js/print.js"></script>
+<script src="/static/js/admin.js"></script>
+<script src="/static/js/patient.js"></script>
+
+<script>
+  function toggleMobileNav() {
+    const btn    = document.getElementById("nav-hamburger");
+    const drawer = document.getElementById("nav-drawer");
+    const open   = drawer.classList.toggle("open");
+    btn.classList.toggle("open", open);
+  }
+  // Close drawer when clicking outside
+  document.addEventListener("click", function(e) {
+    const drawer = document.getElementById("nav-drawer");
+    const btn    = document.getElementById("nav-hamburger");
+    if (drawer.classList.contains("open") &&
+        !drawer.contains(e.target) && !btn.contains(e.target)) {
+      drawer.classList.remove("open");
+      btn.classList.remove("open");
+    }
+  });
+
+  (async function init() {
+    try {
+      const me = await api("/api/me");
+      if (me && !me.error) {
+        currentUser = me;
+        if (me.role === "admin") {
+          await loadAdminDashboard();
+          showPage("admin");
+        } else {
+          await loadNurseDashboard();
+          showPage("dashboard");
+        }
+        return;
+      }
+    } catch (_) {}
+    showPage("home");
+    updateNav();
+    // Set portal date
+    const pd = document.getElementById("portal-date");
+    if (pd) pd.textContent = new Date().toLocaleDateString("en-PH",{weekday:"long",year:"numeric",month:"long",day:"numeric"});
+  })();
+</script>
+
+</body>
+</html>
