@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════
-   eTELEmo TeleHealth — home.css
+   eTelemo TeleHealth — home.css
    ═══════════════════════════════════════════════════════ */
 
 /* ── Override body background on home page ──────────── */
@@ -190,6 +190,14 @@
 .app-icon    { height: 72px; width: 72px; border-radius: 50%; object-fit: cover; margin-bottom: .9rem; }
 .app-name    { font-weight: 700; font-size: .95rem; color: var(--navy); margin-bottom: .6rem; }
 .app-desc    { font-size: .84rem; color: var(--slate); line-height: 1.6; }
+@media (max-width: 400px) {
+  .app-icon { height: 50px; width: 50px; }
+  .app-card { padding: 1rem 0.8rem; }
+  .app-name { font-size: 0.85rem; }
+  .app-desc { font-size: 0.75rem; }
+}
+
+
 
 /* ── Footer ─────────────────────────────────────────── */
 footer       { background: #0A1628 !important; color: var(--muted); text-align: center; padding: 2rem 1.5rem; font-size: .85rem; border-top: 1px solid rgba(255,255,255,.05); }

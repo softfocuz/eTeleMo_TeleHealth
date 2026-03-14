@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════
-   eTELEmo TeleHealth — Main Stylesheet
+   eTeleMo TeleHealth — Main Stylesheet
    ═══════════════════════════════════════════════════════ */
 
 :root {
@@ -171,3 +171,20 @@ section       { padding: 5rem 1.5rem; }
   background:var(--cream);color:var(--navy);line-height:1.5;
 }
 .tbl-ta:focus { outline:none;border-color:var(--teal);background:#fff; }
+
+/* INSERT NEW PAHABOL */
+.image-row {
+  display: flex;   
+  flex-direction: row; 
+  text-align: center;    
+  justify-content: center; 
+  gap: 10px;                
+  flex-wrap: nowrap; 
+  background-color: #d8d8d8;    
+}
+
+.image-row img {
+  width: 45%;               
+  height: auto;
+  object-fit: cover;
+}
