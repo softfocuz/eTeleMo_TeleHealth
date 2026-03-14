@@ -73,7 +73,7 @@ def _get_sheet_name(form_id):
 
 SHEETS = {
 "Admission and Discharge Record": {
-    "title": "eTELEmo — ADMISSION AND DISCHARGE RECORD",
+    "title": "eTelemo — ADMISSION AND DISCHARGE RECORD",
     "cols": [("Submitted By",18),("Date Submitted",16),("Nurse Email",22),
         ("HRN No.",12),("Med. Record No.",16),("Last Name",16),("First Name",16),("Suffix",8),("Middle Name",16),
         ("Service",14),("Rooms",10),("Permanent Address",28),("Telephone No.",16),
